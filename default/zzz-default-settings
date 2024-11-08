@@ -182,6 +182,11 @@ uci -q get network.globals.packet_steering > /dev/null || {
     uci commit network
 }
 
+sed -i '/DISTRIB_REVISION/d' /etc/openwrt_release
+echo "DISTRIB_REVISION=''" >> /etc/openwrt_release
+sed -i '/DISTRIB_DESCRIPTION/d' /etc/openwrt_release
+echo "DISTRIB_DESCRIPTION='OpenWrt SNAPSHOT '" >> /etc/openwrt_release
+
 # disable coremark
 sed -i '/coremark/d' /etc/crontabs/root
 crontab /etc/crontabs/root
